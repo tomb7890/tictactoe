@@ -12,7 +12,21 @@ td {
     font-size: 1em;
 }
 
-
-.big {
+div#game {
     font-size: 2em;
+}
+
+table.game {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+table {
+    text-align: center;
+}
+
+
+div#footer {
+    font-size: 2em;
+    text-align: center;
 }
