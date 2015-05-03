@@ -1,18 +1,21 @@
+var xSym = "X";
+var oSym = "O";
+
 var count = 0;
 $('td').on('click', function() {
 
-    if (  $(this).text() == "X" ||
-          $(this).text() == "O" )
+    if (  $(this).text() == xSym ||
+          $(this).text() == oSym )
     {
         return;
     }
 
     if ( nextTurn ()) {
         // $(this).html("&#1002;");
-        $(this).text("O");
+        $(this).text(oSym);
     } else {
         // $(this).html("&#510;");
-        $(this).text("X");
+        $(this).text(xSym);
     }
     count++;
     checkBoard();
@@ -93,7 +96,7 @@ function checkRowsForWinBy(x) {
 }
 
 function checkBoard() {
-    var players = ["X", "O"];
+    var players = [xSym, oSym];
     for (var p = 0; p < players.length; p++) {
         var a = checkRowsForWinBy(players[p]);
         var b = checkColsForWinBy(players[p]);
