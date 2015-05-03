@@ -42,8 +42,6 @@ function checkDiagsforWinBy(x)
         return true;
     }
 
-
-
     // anti diagonal
     n = 0;
     for ( cell = 1; cell < 4; cell++ ) {
@@ -58,8 +56,6 @@ function checkDiagsforWinBy(x)
     }
     return false;
 }
-
-
 
 function checkColsForWinBy(x) {
     for ( var td = 1; td < 4; td++ ) {
@@ -112,13 +108,12 @@ function checkBoard() {
         }
     }
 
-
     var players = ["X", "O"];
     for (var p = 0; p < players.length; p++) {
-        var z = checkRowsForWinBy(players[p]);
-        var zz = checkColsForWinBy(players[p]);
-        var zzz = checkDiagsforWinBy(players[p]);
-        if ( z == true || zz == true || zzz == true ) {
+        var a = checkRowsForWinBy(players[p]);
+        var b = checkColsForWinBy(players[p]);
+        var c = checkDiagsforWinBy(players[p]);
+        if ( a == true || b == true || c == true ) {
             rc = $("table:nth-child(1)");
             var message = "Player " + players[p] + " has won!";
             rc.append("<span class='big'> - " + message + "</span>");
