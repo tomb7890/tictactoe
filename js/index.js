@@ -1,11 +1,3 @@
-var model = new Array (3);
-for ( var r = 0; r < 3; r++ ) {
-    model[r] = new Array(3);
-    for ( var c =0 ; c < 3; c++ ) {
-        model[r][c] = 0;
-    }
-}
-
 var count = 0;
 $('td').on('click', function() {
     if ( nextTurn ()) {
@@ -94,19 +86,6 @@ function checkRowsForWinBy(x) {
 }
 
 function checkBoard() {
-    // loop through TRs and TDs of table and copy elements' state into
-    // the model, Model.
-    for ( var tr = 1; tr < 4; tr++ ) {
-        for ( var td = 1; td < 4 ; td++ ) {
-            var rc = rowcol(tr,td);
-            if ( "X" ==  rc.text() ) {
-                // rc.append("<span class='g'> - " + tr + ":" +
-                //           td + "nd!</span>" );
-
-                model[tr-1][td-1] = "X";
-            }
-        }
-    }
 
     var players = ["X", "O"];
     for (var p = 0; p < players.length; p++) {
