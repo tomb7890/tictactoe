@@ -1,5 +1,12 @@
 var count = 0;
 $('td').on('click', function() {
+
+    if (  $(this).text() == "X" ||
+          $(this).text() == "O" )
+    {
+        return;
+    }
+
     if ( nextTurn ()) {
         // $(this).html("&#1002;");
         $(this).text("O");
@@ -86,7 +93,6 @@ function checkRowsForWinBy(x) {
 }
 
 function checkBoard() {
-
     var players = ["X", "O"];
     for (var p = 0; p < players.length; p++) {
         var a = checkRowsForWinBy(players[p]);
