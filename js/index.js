@@ -5,7 +5,7 @@ var count = 0;
 $('td').on('click', function() {
     if (thisCellNotEmpty()) return;
     if (gameHasBeenWon())   return;
-    markCurrentCell();
+    markCurrentCell(this);
     processBoard();
 });
 
@@ -17,11 +17,11 @@ function thisCellNotEmpty() {
     return false;
 }
 
-function markCurrentCell(){
+function markCurrentCell(element){
     if ( nextTurn ()) {
-        $(this).text(oSym);
+        $(element).text(oSym);
     } else {
-        $(this).text(xSym);
+        $(element).text(xSym);
     }
     count++;
 }
@@ -139,17 +139,17 @@ function processBoard() {
     var players = [xSym, oSym];
     for (var p = 0; p < players.length; p++) {
         var pp = players[p];
-        if (checkRowsForWinBy(pp))       myConsole("Player " + pp + " has won!" );
-        else if (checkColsForWinBy(pp))  myConsole("Player " + pp + " has won!" );
-        else if (checkDiagsforWinBy(pp)) myConsole("Player " + pp + " has won!" );
+        if (checkRowsForWinBy(pp))       userMessage("Player " + pp + " has won!" );
+        else if (checkColsForWinBy(pp))  userMessage("Player " + pp + " has won!" );
+        else if (checkDiagsforWinBy(pp)) userMessage("Player " + pp + " has won!" );
     }
 
     if (checkForDraw()) {
-        myConsole("The game is a draw!");
+        userMessage("The game is a draw!");
     }
 }
 
-function myConsole(message) {
+function userMessage(message) {
     var rc = $("div#footer");
     var msg = message + "<BR>reload the page to restart.";
     rc.html("<span class='big'> - " + msg + "</span>");
