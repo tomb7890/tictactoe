@@ -3,23 +3,28 @@ var oSym = "O";
 var count = 0;
 
 $('td').on('click', function() {
+    if (thisCellNotEmpty()) return;
+    if (gameHasBeenWon())   return;
+    markCurrentCell();
+    processBoard();
+});
+
+function thisCellNotEmpty() {
     if (  $(this).text() == xSym ||
-          $(this).text() == oSym )
-    {
-        return;
-    }
+          $(this).text() == oSym ) {
+              return true;
+              }
+    return false;
+}
 
-    if ( gameHasBeenWon() )
-        return;
-
+function markCurrentCell(){
     if ( nextTurn ()) {
         $(this).text(oSym);
     } else {
         $(this).text(xSym);
     }
     count++;
-    checkBoard();
-});
+}
 
 function nextTurn ()
 {
@@ -35,7 +40,6 @@ function countOfEmptyCells() {
     for ( var tr = 1; tr < 4; tr++ ) {
         for ( var td = 1; td < 4 ; td++ ) {
             var rct = rowcol(tr,td).text();
-            // console.log(rct);
             if ( rct.length < 1  ) {
                 emptycellcount = emptycellcount + 1;
             }
@@ -93,7 +97,6 @@ function checkDiagsforWinBy(x)
         }
     }
     if ( n == 3 ) {
-        // console.log( "got here");
         return true;
     }
     return false;
@@ -104,13 +107,11 @@ function checkColsForWinBy(x) {
         var n = 0;
         for ( var tr = 1; tr < 4 ; tr++ ) {
             var rct = rowcol(tr,td).text();
-            // console.log(rct);
             if ( x == rct ) {
                 n = n + 1 ;
             }
         }
         if ( n == 3 ) {
-            // console.log( "got here");
             return true;
         }
     }
@@ -122,20 +123,18 @@ function checkRowsForWinBy(x) {
         var n = 0;
         for ( var td = 1; td < 4 ; td++ ) {
             var rct = rowcol(tr,td).text();
-            // console.log(rct);
             if ( x == rct ) {
                 n = n + 1 ;
             }
         }
         if ( n == 3 ) {
-            // console.log( "got here");
             return true;
         }
     }
     return false;
 }
 
-function checkBoard() {
+function processBoard() {
 
     var players = [xSym, oSym];
     for (var p = 0; p < players.length; p++) {
@@ -150,11 +149,8 @@ function checkBoard() {
     }
 }
 
-
-
-
 function myConsole(message) {
-    var rc = $("table:nth-child(1)");
+    var rc = $("div#footer");
     var msg = message + "<BR>reload the page to restart.";
-    rc.append("<span class='big'> - " + message + "</span>");
+    rc.html("<span class='big'> - " + msg + "</span>");
 }
