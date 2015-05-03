@@ -1,0 +1,16 @@
+td {
+  width: 100px;
+  height: 100px;
+  border: 12px solid black;
+  font-size: 2em;
+  text-align: center;
+}
+
+.g {
+    font-size: 1em;
+}
+
+
+.big {
+    font-size: 2em;
+}
