@@ -1,6 +1,7 @@
 var xSym = "X";
 var oSym = "O";
 
+
 var count = 0;
 $('td').on('click', function() {
 
@@ -28,6 +29,24 @@ function nextTurn ()
 
 function rowcol(r, c ) {
     return $( "tr:nth-child(" + r + ") td:nth-child(" + c + ")" );
+}
+
+function checkForDraw()
+{
+    var emptycellcount = 0;
+    for ( var tr = 1; tr < 4; tr++ ) {
+        for ( var td = 1; td < 4 ; td++ ) {
+            var rct = rowcol(tr,td).text();
+            console.log(rct);
+            if ( rct.length < 1  ) {
+                emptycellcount++;
+            }
+        }
+    }
+    if ( emptycellcount == 0 ) {
+        return true;
+    }
+    return false;
 }
 
 function checkDiagsforWinBy(x)
@@ -97,15 +116,26 @@ function checkRowsForWinBy(x) {
 
 function checkBoard() {
     var players = [xSym, oSym];
+
     for (var p = 0; p < players.length; p++) {
         var a = checkRowsForWinBy(players[p]);
         var b = checkColsForWinBy(players[p]);
         var c = checkDiagsforWinBy(players[p]);
         if ( a == true || b == true || c == true ) {
-            rc = $("table:nth-child(1)");
             var message = "Player " + players[p] + " has won!";
-            rc.append("<span class='big'> - " + message + "</span>");
+            myConsole(message);
         }
     }
 
+    var draw = checkForDraw();
+    if ( draw ) {
+        myConsole( "The game is a draw!" );
+
+    }
+
+}
+
+function myConsole(message) {
+    var rc = $("table:nth-child(1)");
+    rc.append("<span class='big'> - " + message + "</span>");
 }
